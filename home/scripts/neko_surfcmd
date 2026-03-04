@@ -1,5 +1,5 @@
 #!/bin/sh
-url=$(printf "brave search\navellea.xyz\nopen webui\ncomfyui" | dmenu -c -l 4 -p "surf:")
+url=$(printf "brave search\navellea.xyz\nopen webui\ncomfyui" | dmenu -c -l 4 -p "firefox:")
 
 case $url in
 	"brave search") url="https://search.brave.com" ;;
@@ -10,4 +10,4 @@ case $url in
 esac
 
 echo $url
-[ -n "$url" ] && surf "$url" &
+[ -n "$url" ] && firefox "$url" &

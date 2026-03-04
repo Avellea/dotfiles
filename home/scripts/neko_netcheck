@@ -9,7 +9,7 @@ if [[ -z "$GATEWAY" ]]; then
 fi
 
 if ping -c 1 -W 1 "$GATEWAY" >/dev/null 2>&1; then
-	printf "\uf1eb  $LOCAL"
+	printf "\uf1eb "
 	exit 0
 else
 	printf "\uf071 (gateway unreachable)"
