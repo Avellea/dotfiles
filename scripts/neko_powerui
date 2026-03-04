@@ -1,8 +1,9 @@
 #!/bin/bash
 
-case "$(printf "shutdown\nreboot" | dmenu -i -c -l 3 -p "power:")" in
+case "$(printf "shutdown\nreboot\nlock" | dmenu -i -c -l 3 -p "power:")" in
 	shutdown) loginctl poweroff ;;
 	reboot) loginctl reboot ;;
+	lock) slock ;;
 	*) exit 1 ;;
 esac
 
