@@ -55,9 +55,11 @@
 "eject"
   XF86Eject
 
-"/home/kat/dots/scripts/neko_netset"
+"/home/kat/dotfiles/home/scripts/neko_netset"
   XF86LaunchA
 
+"/home/kat/dotfiles/scripts/<here>"
+  XF86LaunchB
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
 #

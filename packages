@@ -15,4 +15,4 @@ polkit
 pkg-config
 gcc
 cmake
-
+htop
