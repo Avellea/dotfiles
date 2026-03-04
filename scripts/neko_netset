@@ -1,0 +1,25 @@
+#!/bin/bash
+
+INTERFACE="${1:-wlp3s0}"
+
+if ! command -v wpa_cli &>/dev/null; then
+	echo "Error: wpa_cli not found." >&2
+	exit 1
+fi
+
+STATUS=$(wpa_cli -i "$INTERFACE" status 2>/dev/null | grep -i "^wpa_state=" | cut -d'=' -f2)
+
+echo "iface: $INTERFACE"
+echo "state: $STATUS"
+
+if [[ "$STATUS" == "COMPLETED" || "$STATUS" == "ASSOCIATED" ]] ; then
+	echo "Network is UP - disconnecting..."
+	wpa_cli -i "$INTERFACE" disconnect
+	sleep 0.25
+	rfkill block all
+else
+	echo "Network is DOWN - reconnecting..."
+	rfkill unblock all
+	sleep 0.25
+	wpa_cli -i "$INTERFACE" reassociate
+fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+url=$(printf "brave search\navellea.xyz\nopen webui\ncomfyui" | dmenu -c -l 4 -p "surf:")
+
+case $url in
+	"brave search") url="https://search.brave.com" ;;
+	"avellea.xyz") url="https://avellea.xyz" ;;
+	"open webui") url="http://192.168.50.62:8080" ;;
+	"comfyui") url="http://192.168.50.62:8188" ;;
+	*) url="$url"
+esac
+
+echo $url
+[ -n "$url" ] && surf "$url" &

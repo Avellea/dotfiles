@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BASE_URL="https://radar.weather.gov/ridge/standard/"
+IMG_CMD="feh -B #1f2c3d --title feh -"
+
+get_local_weather() {
+    curl -s $BASE_URL/KLSX_loop.gif | $IMG_CMD
+}
+
+get_ms_weather() {
+    curl -s $BASE_URL/UPPERMISSVLY_loop.gif | $IMG_CMD
+}
+
+get_us_weather() {
+    curl -s $BASE_URL/CONUS_loop.gif | $IMG_CMD
+}
+
+case "$(printf "St. Louis\nUpper MS Valley\nUnited States" | dmenu -i -c -l 3 -p "where:")" in
+    "St. Louis") get_local_weather ;;
+    "Upper MS Valley") get_ms_weather ;;
+    "United States") get_us_weather ;;
+    *) exit 1 ;;
+esac

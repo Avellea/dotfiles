@@ -1,0 +1,25 @@
+#!/bin/bash
+
+json_data=$(curl -s 192.168.50.62:9287/status)
+
+DATE=$(echo "$json_data" | jq -r '.date')
+GOAL=$(echo "$json_data" | jq -r '.goal_ml')
+PERCENT=$(echo "$json_data" | jq -r '.percent_done')
+REMAINING=$(echo "$json_data" | jq -r '.remaining_ml')
+TOTAL=$(echo "$json_data" | jq -r '.total_ml')
+
+if [ -z "$GOAL" ] || [ "$GOAL" == "null" ]; then
+	echo "Error: No valid JSON data received."
+	exit 1
+fi
+
+NUM_PERCENT=${PERCENT%.*}
+BAR_SIZE=$((NUM_PERCENT / 10))
+PROGRESS_BAR=$(printf '=%.0s' $(seq 1 $BAR_SIZE))$(printf '+%0.s' $(seq 1 $((10 - BAR_SIZE))))
+
+notify-send -t 5000 "Hydration Status" \
+"<b>$PERCENT Complete</b>
+$PROGRESS_BAR
+------------
+<b>Goal:</b> ${GOAL}ml
+<b>Left:</b> ${REMAINING}ml"

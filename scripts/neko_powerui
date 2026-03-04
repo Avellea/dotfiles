@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case "$(printf "shutdown\nreboot" | dmenu -i -c -l 3 -p "power:")" in
+	shutdown) loginctl poweroff ;;
+	reboot) loginctl reboot ;;
+	*) exit 1 ;;
+esac
+
