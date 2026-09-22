@@ -1,2 +1,2 @@
 #!/bin/bash
-/home/$(whoami)/.local/helium/chrome
+/home/$(whoami)/.local/helium/chrome "$@"
