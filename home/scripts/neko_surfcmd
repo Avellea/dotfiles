@@ -10,4 +10,4 @@ case $url in
 esac
 
 echo $url
-[ -n "$url" ] && firefox "$url" &
+[ -n "$url" ] && helium "$url" &
